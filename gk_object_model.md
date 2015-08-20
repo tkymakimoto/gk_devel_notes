@@ -9,7 +9,7 @@
 曲線を数式で表現すると以下のようになる。
 
 \begin{eqnarray}
-\mathbf{r}(t) = \mathbf{f}(t)
+\mathbf{r} = \mathbf{r}(t)
 \label{eq:curve_function}
 \end{eqnarray}
 
@@ -57,10 +57,21 @@ struct curve {
 
 #### 近接点
 
+任意の位置$\mathbf{p}$に対して曲線$\mathbf{r}(t)$への距離$d$は
+
+\begin{eqnarray}
+d(t) = | \mathbf{p} - \mathbf{r}(t) |
+\end{eqnarray}
+
+となる。距離$d$は$t$の関数となるため、$d(t)$としている。
+
+\begin{eqnarray}
+a & = & \mbox{argmin} \: d(t)
+\end{eqnarray}
 
 ```cpp
 template<typename Curve>
-typename curve_traits<Curve>::parameter parameter_on(const Curve& curve, const typename curve_traits<Curve>::dependence& r);
+typename curve_traits<Curve>::parameter parameter_on(const Curve& curve, const typename curve_traits<Curve>::dependence& p);
 ```
 
 #### 導関数
@@ -92,6 +103,9 @@ template<typename Curve>
 typename derivative<Curve>::value_type derivative_of(const Curve& curve);
 ```
 
+\begin{eqnarray*}
+\frac{d}{dt}\mathbf{r}(t) = \lim_{\Delta t \rightarrow 0} \frac{\mathbf{r}(t + \Delta t) - \mathbf{r}(t)}{\Delta t}
+\end{eqnarray*}
 
 #### 接線
 
