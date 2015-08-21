@@ -2,9 +2,29 @@
 
 幾何学ではその内部で線形代数を用いられている。
 
-# コンセプト
+# 曲線（Curve）
 
-## 曲線
+曲線を扱う際に機能として提供すべきもの
+
+0. 曲線上の位置
+0. 導関数
+0. 接線
+0. 曲率 
+0. アフィン変換
+0. 分割（subdivision）
+0. 結合
+0. 単純化 （simplifization）
+
+| 機能 | 実装場所 | 必要性 |
+| :-: | :-: | :-: |
+| 曲線上の位置 | メンバ関数 | ◎ |
+| 導関数 | 一般関数  | ◎ |
+| 接線 | 一般関数 | ◎ |
+| 曲率 | 一般関数 | ◎ |
+| アフィン変換 | 一般関数 | ○ |
+| 分割 | 一般関数 | △ |
+| 結合 | 一般関数 | △ |
+| 単純化 | 一般関数 | △ |
 
 曲線を数式で表現すると以下のようになる。
 
@@ -37,11 +57,7 @@ struct curve_traits {
 };
 ```
 
-曲線を扱う際に機能として提供すべきもの
 
-*  任意のパラメータに対する曲線上の位置
-*  [アッフィン変換]
-*  [導関数]
 
 ### メンバメソッドによる機能提供
 
@@ -127,7 +143,20 @@ typename derivative<typename derivative<Curve>::value_type>::value_type tangent(
 \kappa(t) = \frac{ \sqrt{|\dot{\mathbf{r}}|^2 |\ddot{\mathbf{r}}|^2 - (\dot{\mathbf{r}} \cdot \ddot{\mathbf{r}})^2 } } { |\dot{\mathbf{r}}|^3 }
 \end{eqnarray}
 
-## 直線
+#### 分割
+
+```cpp
+template<typename Curve>
+struct subdivision {
+	typedef Curve source;
+	typedef XXX value_type;
+};
+
+template<typename Curve>
+typename subdivision<Curve>::value_type subdivide(const Curve& curve, const typename curve_traits<Curve>::parameter& t);
+```
+
+## 直線（Line）
 
 \begin{eqnarray}
 \mathbf{r}(a) & = & \mathbf{p}  \\
@@ -195,6 +224,15 @@ template<typename Line>
 direction direct(const Line& l);
 ```
 
+# 曲面（Surface）
 
+\begin{eqnarray}
+\mathbf{r} = \mathbf{r}(u, v)
+\end{eqnarray}
+
+## 平面（Plane）
+
+\begin{eqnarray}
+\end{eqnarray}
 
 > Written with [StackEdit](https://stackedit.io/).
