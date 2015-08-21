@@ -161,8 +161,34 @@ typename subdivision<Curve>::value_type subdivide(const Curve& curve, const type
 \begin{eqnarray}
 \mathbf{r}(a) & = & \mathbf{p}  \\
 \mathbf{r}(b) & = & \mathbf{q} \\ 
-\mathbf{r}(t) & = & \mathbf{p}+ (t - a) \times \frac{\mathbf{q} - \mathbf{p}}{b-a} \\
+\mathbf{r}(t) & = & \mathbf{p}+ \frac{t - a}{b - a}  (\mathbf{q} - \mathbf{p})\\
 \end{eqnarray}
+
+次のコードは、曲線のコンセプトに順守している。
+```cpp
+namespace gk {
+template<typename Scalar>
+class line{
+public:
+	typedef gkfloat parameter;
+	typedef vector<Scalar> dependence;
+public:
+	line();
+	line(const line&);
+	line(const std::pair<parameter, dependence>& start, const std::pair<parameter, dependence>& end);
+	line();
+	~line();
+
+	dependence operator()(const parameter& t) const {
+		return ref_ + t * direction_;
+	}
+
+private:
+	dependence ref_;
+	direction direction_;
+};
+} // namespace gk
+```
 
 - 直線
 - 半直線
@@ -230,9 +256,16 @@ direction direct(const Line& l);
 \mathbf{r} = \mathbf{r}(u, v)
 \end{eqnarray}
 
+```cpp
+template<typename ParameterU, typename ParameterV, typename Dependence>
+struct surface {
+};
+```
+
 ## 平面（Plane）
 
 \begin{eqnarray}
+\mathbf{r} \cdot \mathbf{n} = h
 \end{eqnarray}
 
 > Written with [StackEdit](https://stackedit.io/).
