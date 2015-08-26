@@ -33,7 +33,14 @@
 \label{eq:curve_function}
 \end{eqnarray}
 
-一般的に3次元空間として表現すると、式\eqref{eq:curve_function}の$\mathbf{r}(t)$は
+$r(t)$は一般的に線形空間（ベクトル空間）における**ベクトル**
+である。$N$次の線形空間$R^N$における$r(t)$は次のように表される。
+
+\begin{eqnarray*}
+\mathbf{r}(t) = [\begin{array}{cccc} x_0(t) & x_1(t) & \cdots & x_{N-1}\end{array}]
+\end{eqnarray*}
+
+幾何学における3次元空間として表現すると、式\eqref{eq:curve_function}の$\mathbf{r}(t)$は
 
 \begin{eqnarray*}
 \mathbf{r}(t) = [ \begin{array}{ccc} x(t) & y(t) & z(t) \end{array} ]
